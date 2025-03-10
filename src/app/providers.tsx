@@ -1,17 +1,21 @@
 "use client";
-import { ThemeProvider } from "@/components/theme-provider";
+
 import { ReactNode } from "react";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
+    <ClerkProvider afterSignOutUrl={"/"}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem
+        disableTransitionOnChange
+      >
+        {children}
+      </ThemeProvider>
+    </ClerkProvider>
   );
 };
 

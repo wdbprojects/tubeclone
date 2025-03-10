@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useAuth, useClerk } from "@clerk/nextjs";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -9,9 +11,11 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { personalSectionItems } from "@/lib/constants";
-import Link from "next/link";
 
 const PersonalSection = () => {
+  const clerk = useClerk();
+  const { isSignedIn } = useAuth();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>You</SidebarGroupLabel>
@@ -25,7 +29,12 @@ const PersonalSection = () => {
                   tooltip={item.title}
                   asChild
                   isActive={false} // TODO: change to look at current pathname
-                  onClick={() => {}}
+                  onClick={(event) => {
+                    if (!isSignedIn && item.auth) {
+                      event.preventDefault();
+                      return clerk.openSignIn();
+                    }
+                  }}
                 >
                   <Link href={item.url} className="flex items-center gap-4">
                     <item.icon />
