@@ -7,11 +7,11 @@ const SearchInput = () => {
 
   return (
     <form className="flex w-full max-w-[600px] items-center">
-      <div className="relative w-full ">
+      <div className="relative w-full">
         <Input
           type="search"
           placeholder="Search for videos..."
-          className="w-full pl-4 pr-12 shadow-none rounded-l-full "
+          className="w-full pl-4 pr-12 shadow-none rounded-l-full"
         />
       </div>
       {/* // TODO: add remove search button */}
